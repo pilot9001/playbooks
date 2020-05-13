@@ -1,0 +1,21 @@
+--- # NginX demo YAML - install nginx on CentOS 
+- hosts: servera48 
+  remote_user: ansadmin 
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+  vars:
+  tasks:
+  - name: Install NginX service on servera48 
+    yum :
+      name: nginx
+      state: latest
+    notify: 
+    - enable and restart ngnix service
+  handlers: 
+  - name: enable and restart nginx service
+    service: 
+      name: nginx
+      enabled: yes
+      state: restarted

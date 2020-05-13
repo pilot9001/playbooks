@@ -1,0 +1,16 @@
+--- # VIM demo YAML - testing variables
+- hosts: '{{ var_hosts }}' 
+  remote_user: '{{ var_user}}' 
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+  vars:
+    var_hosts: db 
+    var_user: ansadmin
+    var_pkg: vim
+  tasks: 
+  - name: Install package define by vars section
+    yum: 
+      name: '{{ var_pkg}}'
+      state: latest
